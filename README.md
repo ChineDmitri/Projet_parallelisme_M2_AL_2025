@@ -20,6 +20,7 @@
 
 
 # 1. Justification du modèle Map-Reduce
+
 Nous avons choisi le modèle Map-Reduce car:
 
 - Il permet une parallélisation efficace des traitements de données
@@ -34,28 +35,47 @@ Nous avons choisi le modèle Map-Reduce car:
 ## 1. Orchestrator
 
 Charge les données depuis le fichier CSV
+
 Distribue les tâches aux workers
+
 Gère le cycle de vie du traitement
 
+
 ## 2. Workers (3+ instances)
+
 Exécutent les calculs en parallèle sur un sous-ensemble de données
+
 Traitent chaque lot de transactions indépendamment
+
 Stockent les résultats intermédiaires dans Redis
 
+
 ## 3. Aggregator
+
 Collecte et combine tous les résultats intermédiaires
+
 Calcule les métriques finales
+
 Stocke les résultats dans Redis pour accès par l'API
 
+
 ## 4. API
+
 Expose les résultats via des endpoints REST
+
 Permet le filtrage des données (par ville, période, etc.)
+
 Déclenche de nouveaux traitements à la demande
 
+
 ## 5. Redis
+
 Sert de système de messagerie entre les composants
+
 Stocke temporairement les données intermédiaires
+
 Stocke les résultats finaux pour un accès rapide
+
 
 
 # 3. Déployer l'architecture
@@ -84,6 +104,7 @@ autoconnect/
 ```
 
 ### Lancement
+
 Pour lancer l'architecture, placez-vous dans le répertoire de projet et exécutez la commande suivante :
 
 ```bash
@@ -92,6 +113,7 @@ docker-compose up -d
 ```
 
 ### Vérification
+
 Pour vérifier que tout fonctionne correctement, accédez à l'API via l'URL suivante :
 
 ```bash 
