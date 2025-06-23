@@ -1,22 +1,6 @@
 # Schéma d'architeture 
 
-```bash
-┌─────────────┐     ┌───────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │   Workers     │     │             │     │             │
-│ Orchestrator├────►│ (Map Phase)   ├────►│ Aggregator  ├────►│    API      │
-│             │     │ ┌────┐ ┌────┐ │     │ (Reduce)    │     │             │
-└──────┬──────┘     │ │W1  │ │W2..│ │     └─────────────┘     └─────────────┘
-       │            └─┴────┴─┴────┴─┘             ▲                  ▲
-       │                                          │                  │
-       │            ┌─────────────────────────────┴──────────────────┘
-       ▼            ▼
-┌─────────────────────────┐
-│                         │
-│        Redis            │
-│ (Message Queue & Cache) │
-│                         │
-└─────────────────────────┘
-```
+![Schéma d'architecture du projet](http://url/to/img.png)
 
 
 # 1. Justification du modèle Map-Reduce
