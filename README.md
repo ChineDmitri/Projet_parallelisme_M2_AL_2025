@@ -1,6 +1,6 @@
 # Schéma d'architeture 
 
-![Schéma d'architecture du projet](http://url/to/img.png)
+![Schéma d'architecture du projet](https://github.com/ChineDmitri/Projet_parallelisme_M2_AL_2025/blob/main/schema_archi.png?raw=true)
 
 
 # 1. Justification du modèle Map-Reduce
