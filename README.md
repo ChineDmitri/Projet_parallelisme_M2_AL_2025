@@ -59,13 +59,76 @@ Calcule les métriques finales
 Stocke les résultats dans Redis pour accès par l'API
 
 
-## 4. API
+# 4. Documentation de l'API
 
-Expose les résultats via des endpoints REST
+L'API expose plusieurs endpoints pour accéder aux données analysées :
 
-Permet le filtrage des données (par ville, période, etc.)
+## Endpoints disponibles
 
-Déclenche de nouveaux traitements à la demande
+### GET `/api/villes`
+
+Récupère la liste des villes présentes dans les données.
+
+**Réponse :**
+```json
+{
+  "villes": ["Paris", "Lyon", "Marseille", "..."]
+}
+```
+
+### GET `/api/ca-mensuel`
+
+Récupère le chiffre d'affaires mensuel par ville.
+
+**Paramètres optionnels :**
+- `ville` : Filtre les résultats pour une ville spécifique
+- `mois` : Filtre par mois au format YYYY-MM
+
+**Exemple :** `/api/ca-mensuel?ville=Paris&mois=2023-01`
+
+### GET `/api/repartition`
+
+Récupère la répartition vente/location par ville.
+
+**Paramètres optionnels :**
+- `ville` : Filtre les résultats pour une ville spécifique
+- `format` : Si égal à "percentage", renvoie les pourcentages plutôt que les comptages bruts
+
+**Exemple :** `/api/repartition?ville=Lyon&format=percentage`
+
+### GET `/api/top-modeles`
+
+Récupère les modèles de véhicules les plus populaires par ville.
+
+**Paramètres optionnels :**
+- `ville` : Filtre les résultats pour une ville spécifique
+
+**Exemple :** `/api/top-modeles?ville=Marseille`
+
+### POST `/api/process`
+
+Déclenche un nouveau traitement des données.
+
+**Réponse :**
+```json
+{
+  "status": "processing_started",
+  "job_id": "uuid-généré"
+}
+```
+
+## Exemples d'utilisation
+
+```bash
+# Obtenir la liste des villes
+curl http://localhost:5000/api/villes
+
+# Obtenir le CA mensuel pour Paris en janvier 2023
+curl http://localhost:5000/api/ca-mensuel?ville=Paris&mois=2023-01
+
+# Lancer un nouveau traitement des données
+curl -X POST http://localhost:5000/api/process
+```
 
 
 ## 5. Redis
